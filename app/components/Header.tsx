@@ -25,21 +25,26 @@ export function Header({
 }: HeaderProps) {
   const {menu} = header;
   return (
-    <header className="header flex items-center gap-x-8">
-      <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
-        <img
-          src="/logo.png"
-          className="w-[160px] h-[46px] object-cover"
-          alt="logo"
+    <header className=" bg-[#f0ebdf] w-full h-[var(--header-height)] !sticky top-0 z-10  ">
+      <div className='max-w-[var(--max-width-container-xl)] flex justify-between items-center gap-x-8 mx-auto lg:px-[64px] px-[12px]'>
+      <HeaderMenuMobileToggle />
+      <div className="flex">
+        <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
+          <img
+            src="/logo.png"
+            className="w-[160px] h-[46px] object-cover"
+            alt="logo"
+          />
+        </NavLink>
+        <HeaderMenu
+          menu={menu}
+          viewport="desktop"
+          primaryDomainUrl={header.shop.primaryDomain.url}
+          publicStoreDomain={publicStoreDomain}
         />
-      </NavLink>
-      <HeaderMenu
-        menu={menu}
-        viewport="desktop"
-        primaryDomainUrl={header.shop.primaryDomain.url}
-        publicStoreDomain={publicStoreDomain}
-      />
+      </div>
       <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
+      </div>
     </header>
   );
 }
@@ -55,7 +60,7 @@ export function HeaderMenu({
   viewport: Viewport;
   publicStoreDomain: HeaderProps['publicStoreDomain'];
 }) {
-  const className = `flex items-center gap-x-8 ml-8`;
+  const className = `items-center gap-x-8 ml-8 hidden lg:flex`;
   const {close} = useAside();
 
   return (
@@ -83,7 +88,7 @@ export function HeaderMenu({
             : item.url;
         return (
           <NavLink
-            className="text-neutral-5 text-xl font-medium leading-7"
+            className="text-neutral-5 text-xl font-medium leading-7 hidden lg:block "
             end
             key={item.id}
             onClick={close}
@@ -105,9 +110,13 @@ function HeaderCtas({
 }: Pick<HeaderProps, 'isLoggedIn' | 'cart'>) {
   return (
     <nav className="header-ctas" role="navigation">
-      <HeaderMenuMobileToggle />
       <SearchToggle />
-      <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
+      <NavLink
+        prefetch="intent"
+        to="/account"
+        style={activeLinkStyle}
+        className="hidden lg:block"
+      >
         <Suspense fallback="Sign in">
           <Await resolve={isLoggedIn} errorElement="Sign in">
             {(isLoggedIn) =>
@@ -142,10 +151,7 @@ function HeaderCtas({
 function HeaderMenuMobileToggle() {
   const {open} = useAside();
   return (
-    <button
-      className="header-menu-mobile-toggle reset"
-      onClick={() => open('mobile')}
-    >
+    <button className="lg:hidden block reset" onClick={() => open('mobile')}>
       <h3>☰</h3>
     </button>
   );

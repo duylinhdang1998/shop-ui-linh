@@ -165,22 +165,7 @@ button.reset:hover:not(:has(> *)) {
 * components/Header
 * --------------------------------------------------
 */
-.header {
-  align-items: center;
-  background: #f0ebdf;
-  display: flex;
-  height: var(--header-height);
-  padding: 0 64px;
-  position: sticky;
-  top: 0;
-  z-index: 1;
-}
 
-.header-menu-mobile-toggle {
-  @media (min-width: 48em) {
-    display: none;
-  }
-}
 
 .header-menu-mobile {
   display: flex;
@@ -206,7 +191,6 @@ button.reset:hover:not(:has(> *)) {
   align-items: center;
   display: flex;
   grid-gap: 1rem;
-  margin-left: auto;
 }
 
 .header-ctas > * {

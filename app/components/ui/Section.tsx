@@ -9,8 +9,8 @@ interface SectionProps {
 
 export const Section = ({ children, className = '', dark = false, title }: SectionProps) => {
   return (
-    <section className={`py-25 my-10 ${dark ? 'text-white' : ''} ${className}`}>
-      <div className="max-w-[1440px] mx-auto px-8">
+    <section className={`my-6 md:my-[66px] ${dark ? 'text-white' : ''} ${className}`}>
+      <div className="max-w-[var(--max-width-container-xl)] mx-auto lg:px-[64px] px-[12px] rounded-2xl">
         {title && (
           <h2 className="text-[32px] font-bold text-center mb-16 tracking-wider">
             {title}

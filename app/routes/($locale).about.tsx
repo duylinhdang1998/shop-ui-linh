@@ -43,26 +43,28 @@ const About = () => {
   return (
     <div className="bg-background-2">
       {/* Hero Section */}
-      <section className="relative !px-0 !pt-0 pb-[100px]">
-        <img
-          src="/img_hero_about.png"
-          alt="Our Story"
-          className="w-full h-[860px] object-cover"
-        />
-        <div className="absolute lg:bottom-[56px] left-0 right-0 flex flex-col items-center gap-y-8 justify-center text-white">
-          <span className="text-[32px] sm:text-[44px] lg:text-[48px] font-medium tracking-wide my-0">
-            OUR STORY
-          </span>
-          <span className="text-[16px] sm:text-[18px] md:text-[20px] lg:text-[32px] leading-[40px]">
-            The journey from thread to dream
-          </span>
+      <section className="relative w-full !pt-0 mb-[100px] flex justify-center ">
+        <div className="max-w-[var(--max-width-container-xl)] lg:px-[64px] px-[12px]">
+          <img
+            src="/img_hero_about.png"
+            alt="Our Story"
+            className="w-full h-[860px] object-cover "
+          />
+          <div className="absolute lg:bottom-[56px] left-0 right-0  flex-col items-center gap-y-8 justify-center text-white hidden lg:flex">
+            <span className="text-[32px] sm:text-[44px] lg:text-[48px] font-medium tracking-wide my-0">
+              OUR STORY
+            </span>
+            <span className="text-[16px] sm:text-[18px] md:text-[20px] lg:text-[32px] leading-[40px]">
+              The journey from thread to dream
+            </span>
+          </div>
         </div>
       </section>
 
       {/* Dreamey Section */}
-      <section className="bg-[#EADFD5] py-12 sm:py-16 md:py-20 lg:py-[100px]">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 flex justify-center flex-col items-center">
-          <div className="rounded-t-[200px] sm:rounded-t-[300px] md:rounded-t-[400px] flex justify-center items-center bg-[#EADFD5] mb-8 sm:mb-12 md:mb-15">
+      <section className="w-full bg-[#EADFD5] py-12 sm:py-16 md:py-20 lg:py-[100px] ">
+        <div className=" max-w-[var(--max-width-container-xl)] mx-auto px-4 sm:px-6 md:px-8 flex justify-center flex-col items-center">
+          <div className="rounded-t-[200px] sm:rounded-t-[300px] md:rounded-t-[400px] flex justify-center items-center bg-[#EADFD5] mb-8 sm:mb-12 md:mb-20">
             <img
               src="/img_dreamey.png"
               alt="Dreamey"
@@ -88,9 +90,10 @@ const About = () => {
       </section>
 
       {/* Process Section */}
-      <Section className="bg-[url('/bg_nature.png')] bg-cover bg-center relative py-12 sm:py-16 md:py-20 lg:py-25">
-        <div className="absolute inset-0 bg-black/50"></div>
-        <div className="relative z-10 px-4 sm:px-6 md:px-8">
+      <Section className="w-full">
+      <div className="relative py-12 sm:py-16 md:py-20 lg:py-25 bg-[url('/bg_nature.png')] bg-cover bg-center max-w-[var(--max-width-container-xl)] mx-auto rounded-2xl">
+        <div className="absolute inset-0 bg-black/20  rounded-xl"></div>
+        <div className="relative z-10 sm:px-6 md:px-8 rounded-2xl px-5 md-5 lg:px-20">
           <p className="text-center text-white font-bold text-[16px] sm:text-[18px] md:text-[20px] mb-4">
             FROM NATURE TO NURTURE
           </p>
@@ -132,6 +135,7 @@ const About = () => {
               description="Final refinement process that perfects our signature CloudThera fabric feel and performance."
             />
           </div>
+        </div>
         </div>
       </Section>
 
