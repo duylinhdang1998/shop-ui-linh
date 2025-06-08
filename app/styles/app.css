@@ -34,7 +34,7 @@ img {
 }
 
 aside {
-  background: var(--color-light);
+  background: #f0ebdf;
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
   height: 100vh;
   width: min(var(--aside-width), 100vw);
@@ -164,7 +164,7 @@ button.reset:hover:not(:has(> *)) {
 */
 .header {
   align-items: center;
-  background: #fff;
+  background: #f0ebdf;
   display: flex;
   height: var(--header-height);
   padding: 0 1rem;
