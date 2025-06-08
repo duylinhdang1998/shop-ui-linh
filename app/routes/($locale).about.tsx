@@ -41,23 +41,21 @@ const About = () => {
   ];
 
   return (
-    <div className="bg-[#F0EBDF]">
+    <div className="bg-background-2">
       {/* Hero Section */}
-      <section className="relative h-[50vh] sm:h-[60vh] min-h-[350px] sm:min-h-[400px]">
+      <section className="relative !px-0 !pt-0 pb-[100px]">
         <img
           src="/img_hero_about.png"
           alt="Our Story"
-          className="w-full h-full object-cover"
+          className="w-full h-[860px] object-cover"
         />
-        <div className="absolute bottom-8 sm:bottom-15 left-0 right-0 flex items-end justify-center text-white">
-          <div className="text-center px-4">
-            <h1 className="text-[32px] sm:text-[44px] md:text-[64px] font-light mb-2 sm:mb-4 tracking-wide">
-              OUR STORY
-            </h1>
-            <p className="text-[16px] sm:text-[18px] md:text-[20px] opacity-90">
-              The journey from thread to dream
-            </p>
-          </div>
+        <div className="absolute lg:bottom-[56px] left-0 right-0 flex flex-col items-center gap-y-8 justify-center text-white">
+          <span className="text-[32px] sm:text-[44px] lg:text-[48px] font-medium tracking-wide my-0">
+            OUR STORY
+          </span>
+          <span className="text-[16px] sm:text-[18px] md:text-[20px] lg:text-[32px] leading-[40px]">
+            The journey from thread to dream
+          </span>
         </div>
       </section>
 
@@ -96,12 +94,12 @@ const About = () => {
           <p className="text-center text-white font-bold text-[16px] sm:text-[18px] md:text-[20px] mb-4">
             FROM NATURE TO NURTURE
           </p>
-         <div className="my-5">
-         <p className="text-center  text-[14px] sm:text-[16px] text-white/90 mb-8 sm:mb-12 md:mb-16 sm:max-w-[600px] md:max-w-[100%]  mx-auto">
-            Our innovative 6-step process transforms sustainable resources into
-            sleep-enhancing bedding with minimal environmental impact.
-          </p>
-         </div>
+          <div className="my-5">
+            <p className="text-center  text-[14px] sm:text-[16px] text-white/90 mb-8 sm:mb-12 md:mb-16 sm:max-w-[600px] md:max-w-[100%]  mx-auto">
+              Our innovative 6-step process transforms sustainable resources
+              into sleep-enhancing bedding with minimal environmental impact.
+            </p>
+          </div>
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 md:gap-12 lg:gap-16">
             <ProcessStep
               number="1"
@@ -137,63 +135,65 @@ const About = () => {
         </div>
       </Section>
 
-       {/* Location Section */}
-       <div className="max-w-[90%] mx-auto sm:px-6 md:px-8 py-12 sm:py-16 md:py-20 lg:py-24">
+      {/* Location Section */}
+      <div className="max-w-[90%] mx-auto sm:px-6 md:px-8 py-12 sm:py-16 md:py-20 lg:py-24">
         {/* Mobile Layout - 2x2 Grid + Text */}
         <div className="block lg:hidden">
           {/* 2x2 Image Grid */}
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-8">
-          <div className="flex justify-end items-start pr-[25px]">
-          <LocationImage
-              src="/img_location_1.png"
-              alt="Vietnam Cave"
-              className="w-[30vw] h-[30vw] max-w-[130px] max-h-[130px] rounded-lg object-cover"
-            />
-          </div>
-           <div className="flex justify-end items-end">
-           <LocationImage
-              src="/img_location_2.png"
-              alt="Ha Long Bay"
-              className="w-[35vw] h-[35vw] max-w-[160px] max-h-[160px] rounded-lg object-cover"
-            />
-           </div>
-           <div>
-           <LocationImage
-              src="/img_location_3.png"
-              alt="Vietnam Rice Terraces"
-              className="w-[35vw] h-[35vw] max-w-[160px] max-h-[160px] rounded-lg object-cover"
-            />
-           </div>
-            <div className="flex justify-start items-end pl-[30px]">
-            <LocationImage
-              src="/img_location_4.png"
-              alt="Traditional Vietnamese Architecture"
-              className="w-[30vw] h-[30vw] max-w-[130px] max-h-[130px] rounded-lg object-cover"
-            />
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6 mb-8 sm:mb-10 md:mb-12">
+            <div className="flex justify-end items-start pr-[25px] md:pr-[30px]">
+              <LocationImage
+                src="/img_location_1.png"
+                alt="Vietnam Cave"
+                className="w-[30vw] h-[30vw] max-w-[130px] max-h-[130px] sm:max-w-[150px] sm:max-h-[150px] md:max-w-[200px] md:max-h-[200px] rounded-lg object-cover"
+              />
+            </div>
+            <div className="flex justify-end items-end">
+              <LocationImage
+                src="/img_location_2.png"
+                alt="Ha Long Bay"
+                className="w-[35vw] h-[35vw] max-w-[160px] max-h-[160px] sm:max-w-[180px] sm:max-h-[180px] md:max-w-[240px] md:max-h-[240px] rounded-lg object-cover"
+              />
+            </div>
+            <div>
+              <LocationImage
+                src="/img_location_3.png"
+                alt="Vietnam Rice Terraces"
+                className="w-[35vw] h-[35vw] max-w-[160px] max-h-[160px] sm:max-w-[180px] sm:max-h-[180px] md:max-w-[240px] md:max-h-[240px] rounded-lg object-cover"
+              />
+            </div>
+            <div className="flex justify-start items-end pl-[30px] md:pl-[35px]">
+              <LocationImage
+                src="/img_location_4.png"
+                alt="Traditional Vietnamese Architecture"
+                className="w-[30vw] h-[30vw] max-w-[130px] max-h-[130px] sm:max-w-[150px] sm:max-h-[150px] md:max-w-[200px] md:max-h-[200px] rounded-lg object-cover"
+              />
             </div>
           </div>
-          
+
           {/* Text Content */}
-          <div className="text-center px-2 sm:px-4">
-            <h2 className="text-base sm:text-[24px] font-light text-[#333333] mb-4 sm:mb-6 tracking-wide leading-tight">
+          <div className="text-center px-2 sm:px-4 md:px-6">
+            <h2 className="text-base sm:text-[24px] md:text-[28px] font-light text-[#333333] mb-4 sm:mb-6 md:mb-8 tracking-wide leading-tight">
               DESIGNED IN THE U.S.
               <br />
               CRAFTED WITH HEART
               <br />
               IN VIETNAM
             </h2>
-          <div className='space-y-5'>
-          <p className="text-sm text-[12px] sm:text-[14px] leading-[1.5] sm:leading-[1.6]  mx-auto mb-3 sm:mb-4">
-              {`We chose Vietnam for its unmatched textile heritage and skilled
+            <div className="space-y-5 md:space-y-6">
+              <p className="text-sm text-[12px] sm:text-[14px] md:text-[16px] leading-[1.5] sm:leading-[1.6] mx-auto mb-3 sm:mb-4">
+                {`We chose Vietnam for its unmatched textile heritage and skilled
               craftsmanship. As one of the world's top textile exporters,
               Vietnam blends centuries-old techniques with modern innovation.`}
-            </p>
-            <p className="text-sm text-[12px] sm:text-[14px] leading-[1.5] sm:leading-[1.6] mx-auto mt-5">
-              But our impact goes beyond manufacturing. We support the local
-              community by donating a portion of profits to the Hope Group, a
-              charity uplifting Vietnamese children and families.
-            </p>
-          </div>
+              </p>
+              <div className="mt-2">
+                <p className="text-sm text-[12px] sm:text-[14px] md:text-[16px] leading-[1.5] sm:leading-[1.6] mx-auto mt-5">
+                  But our impact goes beyond manufacturing. We support the local
+                  community by donating a portion of profits to the Hope Group,
+                  a charity uplifting Vietnamese children and families.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -227,11 +227,13 @@ const About = () => {
               craftsmanship. As one of the world's top textile exporters,
               Vietnam blends centuries-old techniques with modern innovation.`}
             </p>
-            <p className="text-xs leading-[1.6]  mx-auto ">
-              But our impact goes beyond manufacturing. We support the local
-              community by donating a portion of profits to the Hope Group, a
-              charity uplifting Vietnamese children and families.
-            </p>
+            <div className="mt-2">
+              <p className="text-xs leading-[1.6]  mx-auto ">
+                But our impact goes beyond manufacturing. We support the local
+                community by donating a portion of profits to the Hope Group, a
+                charity uplifting Vietnamese children and families.
+              </p>
+            </div>
           </div>
 
           {/* Right Column */}
@@ -239,7 +241,7 @@ const About = () => {
             <LocationImage
               src="/img_location_2.png"
               alt="Ha Long Bay"
-            className="max-w-[300px] rounded-sm"
+              className="max-w-[300px] rounded-sm"
             />
             <LocationImage
               src="/img_location_4.png"

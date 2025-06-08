@@ -4,3 +4,14 @@
  */
 
 @import 'tailwindcss';
+@theme {
+  --color-primary: #f69149;
+  --color-secondary: #87b6dc;
+  --color-background-1: #eadfd5;
+  --color-background-2: #f0ebdf;
+  --color-background-3: #e6e1d5;
+  --color-functional-positive: #71e38a;
+  --color-functional-caution: #f2db5c;
+  --color-neutral-5: #323232;
+
+}

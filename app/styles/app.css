@@ -7,6 +7,9 @@
   --color-dark: #000;
   --color-light: #fff;
 }
+body {
+  font-family: Satoshi, sans-serif;
+}
 
 img {
   border-radius: 4px;
@@ -167,7 +170,7 @@ button.reset:hover:not(:has(> *)) {
   background: #f0ebdf;
   display: flex;
   height: var(--header-height);
-  padding: 0 1rem;
+  padding: 0 64px;
   position: sticky;
   top: 0;
   z-index: 1;
