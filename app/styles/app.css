@@ -166,7 +166,6 @@ button.reset:hover:not(:has(> *)) {
 * --------------------------------------------------
 */
 
-
 .header-menu-mobile {
   display: flex;
   flex-direction: column;
@@ -196,7 +195,6 @@ button.reset:hover:not(:has(> *)) {
 .header-ctas > * {
   min-width: fit-content;
 }
-
 
 /*
 * --------------------------------------------------
@@ -506,4 +504,12 @@ button.reset:hover:not(:has(> *)) {
 
 .account-logout {
   display: inline-block;
+}
+
+.background-overlay {
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
 }

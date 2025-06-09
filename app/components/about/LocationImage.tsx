@@ -11,7 +11,7 @@ export const LocationImage = ({ src, alt, className = '', aspectRatio = 'square'
       <img
         src={src}
         alt={alt}
-        className="w-full h-full object-cover rounded-sm"
+        className="w-full h-full object-cover rounded-3xl"
       />
     </div>
   );

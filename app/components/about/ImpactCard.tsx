@@ -5,22 +5,29 @@ interface ImpactCardProps {
   className?: string;
 }
 
-export const ImpactCard = ({ image, title, description, className = '' }: ImpactCardProps) => {
+export const ImpactCard = ({
+  image,
+  title,
+  description,
+  className = '',
+}: ImpactCardProps) => {
   return (
-    <div className={`text-center ${className}`}>
-      <div className="w-[60vw] h-[60vw] max-w-[250px] max-h-[250px] sm:w-[40vw] sm:h-[40vw] sm:max-w-[180px] sm:max-h-[180px] md:w-[25vw] md:h-[25vw] md:max-w-[200px] md:max-h-[200px] lg:w-[15vw] lg:h-[15vw] lg:max-w-[220px] lg:max-h-[220px] mx-auto mb-4 sm:mb-5 md:mb-6">
+    <div className={`text-center ${className} flex flex-col gap-y-8 xl:gap-y-16`}>
+      <div className=" rounded-full flex justify-center items-center">
         <img
           src={`/${image}`}
           alt={title}
-          className="w-full h-full object-cover rounded-full"
+          className="w-[342px] h-[342px] xl:w-full xl:h-[440px] object-contain rounded-full"
         />
       </div>
-      <h3 className="text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] font-semibold mb-2 sm:mb-3 text-[#333333] leading-tight">
-        {title}
-      </h3>
-      <p className="text-[10px] sm:text-[12px] md:text-[13px] lg:text-[14px] leading-[1.4] sm:leading-[1.5] md:leading-[1.6] text-[#666666]">
-        {description}
-      </p>
+      <div className="flex flex-col gap-y-[10px]">
+        <span className='text-base xl:text-2xl text-neutral-5 xl:leading-8 font-medium'>
+          {title}
+        </span>
+        <span className='text-neutral-5 font-inter font-normal text-sm xl:text-xl'>
+          {description}
+        </span>
+      </div>
     </div>
   );
-}; 
+};

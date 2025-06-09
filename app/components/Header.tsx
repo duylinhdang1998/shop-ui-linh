@@ -25,25 +25,32 @@ export function Header({
 }: HeaderProps) {
   const {menu} = header;
   return (
-    <header className=" bg-[#f0ebdf] w-full h-[var(--header-height)] !sticky top-0 z-10  ">
-      <div className='max-w-[var(--max-width-container-xl)] flex justify-between items-center gap-x-8 mx-auto lg:px-[64px] px-[12px]'>
-      <HeaderMenuMobileToggle />
-      <div className="flex">
-        <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
-          <img
-            src="/logo.png"
-            className="w-[160px] h-[46px] object-cover"
-            alt="logo"
+    <header className=" bg-[#f0ebdf] w-full !sticky top-0 z-10 py-3 xl:py-6">
+      <div className="max-w-[var(--max-width-container-xl)] flex justify-between items-center gap-x-8 mx-auto lg:px-[64px] px-[12px]">
+        <HeaderMenuMobileToggle />
+        <div className="flex items-center justify-center">
+          <NavLink
+            prefetch="intent"
+            to="/"
+            style={activeLinkStyle}
+            end
+            className="flex grow-[2] justify-center items-center"
+          >
+            <img
+              src="/logo.png"
+              className="w-[118px] h-[34px] xl:w-[160px] xl:h-[46px] object-cover "
+              alt="logo"
+            />
+          </NavLink>
+          <HeaderMenu
+            menu={menu}
+            viewport="desktop"
+            primaryDomainUrl={header.shop.primaryDomain.url}
+            publicStoreDomain={publicStoreDomain}
           />
-        </NavLink>
-        <HeaderMenu
-          menu={menu}
-          viewport="desktop"
-          primaryDomainUrl={header.shop.primaryDomain.url}
-          publicStoreDomain={publicStoreDomain}
-        />
-      </div>
-      <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
+        </div>
+
+        <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
       </div>
     </header>
   );
@@ -152,7 +159,7 @@ function HeaderMenuMobileToggle() {
   const {open} = useAside();
   return (
     <button className="lg:hidden block reset" onClick={() => open('mobile')}>
-      <h3>☰</h3>
+      <h3 className="text-2xl">☰</h3>
     </button>
   );
 }

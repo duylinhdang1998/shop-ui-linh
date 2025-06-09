@@ -2,8 +2,10 @@
  * Configure Tailwind v4 in this file using CSS variables and directives:
  * https://tailwindcss.com/docs/v4-beta#css-first-configuration
  */
+@layer theme, base, components, utilities;
 
-@import 'tailwindcss';
+@import 'tailwindcss' important;
+@import 'tailwindcss/utilities.css' layer(utilities);
 @theme {
   --color-primary: #f69149;
   --color-secondary: #87b6dc;
@@ -13,8 +15,6 @@
   --color-functional-positive: #71e38a;
   --color-functional-caution: #f2db5c;
   --color-neutral-5: #323232;
-
+  --font-inter: "Inter", "sans-serif";
   --max-width-container-xl: 1920px;
-
 }
-
