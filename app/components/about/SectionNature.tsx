@@ -43,7 +43,18 @@ const data = [
 function SectionNature() {
   return (
     <section className="w-full px-3 py-6 xl:px-[64px] xl:py-[66px] overflow-hidden">
-      <div className="relative bg-[url('/bg_nature.png')] bg-no-repeat bg-cover bg-center rounded-3xl py-[34px]">
+      <div className="relative bg-no-repeat bg-cover bg-center rounded-3xl py-[34px]">
+        {/* Background Video */}
+        <video
+          className="absolute inset-0 w-full h-full object-cover rounded-3xl"
+          autoPlay
+          loop
+          muted
+          playsInline
+        >
+          <source src="/background.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
         <div className="absolute inset-0 background-overlay rounded-3xl"></div>
         <div className="relative max-w-[1440px] py-[100px] mx-auto flex flex-col gap-y-8 xl:gap-y-[64px] px-5 2xl:px-0">
           <p className="text-center text-xl text-white font-medium xl:text-[48px]">
@@ -55,10 +66,7 @@ function SectionNature() {
           </span>
           <div className="grid grid-cols-12 gap-4 md:gap-6 lg:gap-8 xl:gap-16">
             {data.map((item, index) => (
-              <div
-                key={item.id}
-                className="col-span-6 xl:col-span-4"
-              >
+              <div key={item.id} className="col-span-6 xl:col-span-4">
                 <ProcessStep
                   number={index + 1}
                   title={item.title}

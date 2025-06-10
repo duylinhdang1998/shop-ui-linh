@@ -2,7 +2,6 @@ import {Section} from '~/components/ui/Section';
 import {ProcessStep} from '~/components/about/ProcessStep';
 import {LocationImage} from '~/components/about/LocationImage';
 import {ImpactCard} from '~/components/about/ImpactCard';
-import {ProductSwiper} from '~/components/ui/ProductSwiper';
 import SectionNature from '~/components/about/SectionNature';
 import SectionLocation from '~/components/about/SectionLocation';
 import SectionProf from '~/components/about/SectionProf';
