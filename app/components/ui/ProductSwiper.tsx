@@ -1,0 +1,48 @@
+import React from 'react';
+import {useKeenSlider} from 'keen-slider/react'; // import from 'keen-slider/react.es' for to get an ES module
+import {ProductItem} from '../ProductItem';
+import {ProductItemFragment} from 'storefrontapi.generated';
+import ProductItemSwiper from './ProductItemSwiper';
+
+interface Props {
+  products: ProductItemFragment[];
+  className?: string;
+}
+export default function ProductSwiper({products, className}: Props) {
+  const [sliderRef, instanceRef] = useKeenSlider(
+    {
+      slideChanged() {
+        console.log('slide changed');
+      },
+      loop: false,
+      breakpoints: {
+        '(min-width: 320px)': {
+          slides: {perView: 1.5, spacing: 20},
+        },
+        '(min-width: 1024px)': {
+          slides: {perView: 3.5, spacing: 10},
+        },
+      },
+      slides: {
+        origin: 'auto',
+        perView: 3.5,
+        spacing: 32,
+      },
+    },
+    [
+      // add plugins here
+    ],
+  );
+
+  return (
+    <div className='px-3 xl:px-0'>
+      <div ref={sliderRef} className="keen-slider">
+        {products.map((item) => (
+          <div className="keen-slider__slide" key={item.id}>
+            <ProductItemSwiper product={item} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
