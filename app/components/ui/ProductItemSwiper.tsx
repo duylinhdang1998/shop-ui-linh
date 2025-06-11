@@ -13,14 +13,28 @@ const starDrawing = (
 );
 export default function ProductItemSwiper({product}: Props) {
   return (
-    <div className="flex flex-col gap-y-5 lg:gap-y-8">
-      <Image
-        src={product.featuredImage?.url}
-        alt={product.featuredImage?.altText}
-        width={560}
-        height={560}
-        className="rounded-2xl"
-      />
+    <div className="group flex flex-col gap-y-5 lg:gap-y-8">
+      <div className=" w-full  overflow-hidden relative rounded-2xl">
+        <Image
+          src={product.featuredImage?.url}
+          alt={product.featuredImage?.altText as string}
+          width={560}
+          height={560}
+          className="rounded-2xl w-full h-full transition-transform duration-500 group-hover:translate-y-[-80px] group-hover:scale-105"
+        />
+        <div className="absolute bg-background-2 top-full left-0 w-full flex flex-col justify-center items-center min-h-[140px] transition-transform duration-400 group-hover:translate-y-[-100%] rounded-b-2xl gap-4 p-3">
+          <ul className="list-disc px-5 font-family-Inter font-weight-400 text-md leading-xl tracking-normal">
+            <li className="m-0">Reduces acne-causing bacteria by 200%</li>
+            <li className="m-0">Ultra-smooth fibers minimize sleep creases</li>
+            <li className="m-0">Reduces hair breakage by 30%</li>
+          </ul>
+          <button className="bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-2xl relative group">
+            <div className="rounded-2xl relative cursor-pointer transition-all ease-in-out before:transition-[width] before:ease-in-out before:duration-700 before:absolute before:bg-white before:h-[1px] before:w-0 hover:before:w-full before:bottom-0 before:left-0 after:transition-[width] after:ease-in-out after:duration-700 after:absolute after:bg-white after:h-[1px] after:w-0 hover:after:w-full after:bottom-0 after:left-0">
+              <span> SHOP NOW</span>
+            </div>
+          </button>
+        </div>
+      </div>
       <div className="text-center flex flex-col gap-y-2 lg:gap-y-4 justify-center items-center">
         <span className="text-xl lg:text-[40px] font-medium text-neutral-5">
           {product.title}
@@ -37,9 +51,11 @@ export default function ProductItemSwiper({product}: Props) {
             itemShapes: starDrawing,
           }}
         />
-        <span className="text-base lg:text-[32px] text-neutral-5 font-medium">
+        <span className="text-base lg:text-[32px] text-neutral-5 font-medium group-hover:text-[24px]">
           From ${product.priceRange.minVariantPrice.amount}{' '}
-          <span className='text-[#666] line-through'>${product.priceRange.maxVariantPrice.amount}</span>
+          <span className="text-[#666] line-through">
+            ${product.priceRange.maxVariantPrice.amount}
+          </span>
         </span>
       </div>
     </div>
