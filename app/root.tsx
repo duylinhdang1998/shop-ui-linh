@@ -19,6 +19,7 @@ import fontsStyles from '~/styles/fonts.css?url';
 import tailwindCss from './styles/tailwind.css?url';
 import {PageLayout} from './components/PageLayout';
 import ratingStyles from '@smastrom/react-rating/style.css?url';
+import { DrawerProvider } from './context/DrawerContext';
 
 export type RootLoader = typeof loader;
 
@@ -182,7 +183,9 @@ export function Layout({children}: {children?: React.ReactNode}) {
             shop={data.shop}
             consent={data.consent}
           >
+             <DrawerProvider>
             <PageLayout {...data}>{children}</PageLayout>
+            </DrawerProvider>
           </Analytics.Provider>
         ) : (
           children

@@ -1,5 +1,5 @@
-import {Await, Link} from 'react-router';
-import {Suspense, useId} from 'react';
+import React, {Suspense, useEffect, useId, useState} from 'react';
+import {Await, Link, useLocation} from 'react-router';
 import type {
   CartApiQueryFragment,
   FooterQuery,
@@ -14,8 +14,11 @@ import {
   SearchFormPredictive,
 } from '~/components/SearchFormPredictive';
 import {SearchResultsPredictive} from '~/components/SearchResultsPredictive';
-import { SaleTop } from './SaleTop';
+import {SaleTop} from './SaleTop';
 import MainFooter from './MainFooter';
+import {useDrawer} from '~/context/DrawerContext';
+import Drawer from '~/components/ui/Drawer';
+import useIsNotMobileViewport from '~/hooks/useIsNotMobileViewport';
 
 interface PageLayoutProps {
   cart: Promise<CartApiQueryFragment | null>;
@@ -34,9 +37,44 @@ export function PageLayout({
   isLoggedIn,
   publicStoreDomain,
 }: PageLayoutProps) {
+  const location = useLocation();
+  const {isDrawerVisible, closeDrawer, openDrawer} = useDrawer();
+  const isNotMobileViewport = useIsNotMobileViewport();
+  const [currentMenu, setCurrentMenu] = useState('main');
+  const isShopPage = location.pathname.startsWith('/shop');
+  const [isTriggerCancel, setIsTriggerCancel] = useState(false);
+
+  const menuItems = [
+    {key: 'home', to: '/', title: 'Home'},
+    {key: 'fabix', to: '/farbric-science', title: 'Fabix'},
+    {key: 'about', to: '/about', title: 'About'},
+    {key: 'shop', to: '/shop', title: 'Shop'},
+  ];
+
+  const categories = [
+    {text: 'Pillowcases', imagePath: 'black_small_pillow.png'},
+    {text: 'Sheets', imagePath: 'black_small_pillow.png'},
+    {text: 'Duvets Cover', imagePath: 'black_small_pillow.png'},
+  ];
+
+  const otherCategories = [
+    {text: 'Essentials Set', imagePath: 'black_small_pillow.png'},
+    {text: 'Complete Sleep Set', imagePath: 'black_small_pillow.png'},
+  ];
+
+
+
+  useEffect(() => {
+    if(isNotMobileViewport && isDrawerVisible){
+      closeDrawer()
+    }
+    if (!isNotMobileViewport && !isDrawerVisible && isShopPage) {
+      openDrawer();
+    }
+  }, [isNotMobileViewport])
   return (
     <Aside.Provider>
-      <SaleTop/>
+      <SaleTop />
       <CartAside cart={cart} />
       <SearchAside />
       <MobileMenuAside header={header} publicStoreDomain={publicStoreDomain} />
@@ -48,13 +86,23 @@ export function PageLayout({
           publicStoreDomain={publicStoreDomain}
         />
       )}
-      <main className=''>{children}</main>
+      <main className="">{children}</main>
       <MainFooter />
       {/* <Footer
         footer={footer}
         header={header}
         publicStoreDomain={publicStoreDomain}
       /> */}
+      <Drawer
+        setIsTriggerCancel={setIsTriggerCancel}
+        isVisible={isDrawerVisible}
+        closeDrawer={closeDrawer}
+        currentMenu={currentMenu}
+        setCurrentMenu={setCurrentMenu}
+        menuItems={menuItems}
+        categories={categories}
+        otherCategories={otherCategories}
+      />
     </Aside.Provider>
   );
 }
