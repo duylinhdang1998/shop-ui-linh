@@ -3,12 +3,21 @@ import {useKeenSlider} from 'keen-slider/react'; // import from 'keen-slider/rea
 import {ProductItem} from '../ProductItem';
 import {ProductItemFragment} from 'storefrontapi.generated';
 import ProductItemSwiper from './ProductItemSwiper';
+import ProductDetail from './ProductDetail';
+import { EffectType } from '~/type';
 
 interface Props {
   products: ProductItemFragment[];
   className?: string;
+  type?: EffectType
 }
-export default function ProductSwiper({products, className}: Props) {
+
+
+export default function ProductSwiper({
+  products,
+  className,
+  type = EffectType.HALF_MASK,
+}: Props) {
   const [sliderRef, instanceRef] = useKeenSlider(
     {
       slideChanged() {
@@ -29,17 +38,16 @@ export default function ProductSwiper({products, className}: Props) {
         spacing: 32,
       },
     },
-    [
-      // add plugins here
-    ],
+    [],
   );
 
   return (
-    <div className='px-3 xl:px-0'>
+    <div className="">
       <div ref={sliderRef} className="keen-slider">
         {products.map((item) => (
           <div className="keen-slider__slide" key={item.id}>
-            <ProductItemSwiper product={item} />
+            {type === EffectType.FULL_MASK && <ProductDetail product={item} />}
+            {type === EffectType.HALF_MASK && <ProductItemSwiper product={item} />}
           </div>
         ))}
       </div>

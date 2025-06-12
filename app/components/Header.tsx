@@ -7,6 +7,7 @@ import {
 } from '@shopify/hydrogen';
 import type {HeaderQuery, CartApiQueryFragment} from 'storefrontapi.generated';
 import {useAside} from '~/components/Aside';
+import { useDrawer } from '~/context/DrawerContext';
 
 interface HeaderProps {
   header: HeaderQuery;
@@ -156,9 +157,10 @@ function HeaderCtas({
 }
 
 function HeaderMenuMobileToggle() {
-  const {open} = useAside();
+  const { openDrawer } = useDrawer();
+
   return (
-    <button className="lg:hidden block reset" onClick={() => open('mobile')}>
+    <button className="lg:hidden block reset" onClick={openDrawer}>
       <h3 className="text-2xl">☰</h3>
     </button>
   );
