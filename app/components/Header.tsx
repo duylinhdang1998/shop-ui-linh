@@ -32,7 +32,7 @@ export function Header({
         <div className="flex items-center justify-center">
           <NavLink
             prefetch="intent"
-            to="/"
+            to="/pillow-showcase"
             style={activeLinkStyle}
             end
             className="flex grow-[2] justify-center items-center"
@@ -251,7 +251,7 @@ const FALLBACK_HEADER_MENU = {
       tags: [],
       title: 'Fabric Science',
       type: 'HTTP',
-      url: '/fabric-science',
+      url: '/farbric-science',
       items: [],
     },
     {

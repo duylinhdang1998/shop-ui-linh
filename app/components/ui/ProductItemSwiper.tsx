@@ -29,7 +29,7 @@ export default function ProductItemSwiper({product}: Props) {
             <li className="m-0">Ultra-smooth fibers minimize sleep creases</li>
             <li className="m-0">Reduces hair breakage by 30%</li>
           </ul>
-         <ButtonUnderline className='py-2 px-4'>SHOP NOW</ButtonUnderline>
+          <ButtonUnderline className="lg:py-4 lg:px-8 px-5 py-3 ">SHOP NOW</ButtonUnderline>
         </div>
       </div>
       <div className="text-center flex flex-col gap-y-2 lg:gap-y-4 justify-center items-center">

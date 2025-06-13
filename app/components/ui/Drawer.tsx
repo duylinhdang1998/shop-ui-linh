@@ -16,7 +16,7 @@ interface DrawerProps {
 }
 
 const Drawer: React.FC<DrawerProps> = ({
-  isVisible,
+  isVisible = false,
   closeDrawer,
   currentMenu,
   setCurrentMenu,
@@ -27,12 +27,15 @@ const Drawer: React.FC<DrawerProps> = ({
 }) => {
   const location = useLocation();
   const isShopPage = location.pathname.startsWith('/shop');
-  if (!isVisible) return null;
 
   return (
-    <div className="fixed bg-background-2 p-[14px] bottom-0 left-0 w-full h-[calc(100vh-40px)] shadow-lg z-50 translate-x-0 transition-transform duration-500 ease-in-out">
+    <div
+      className={`fixed bg-background-2 p-[14px] bottom-0 left-0 w-full h-[calc(100vh-40px)] shadow-lg z-50 transition-transform duration-500 ease-in-out ${
+        isVisible ? 'translate-x-0' : '-translate-x-full'
+      }`}
+    >
       {/* Title and Close Button */}
-      <div className="flex justify-between items-center ">
+      <div className="flex justify-between items-center">
         <img
           src="/logo.png"
           className="w-[118px] h-[34px] xl:w-[160px] xl:h-[46px] object-cover"
@@ -72,7 +75,7 @@ const Drawer: React.FC<DrawerProps> = ({
 
       {/* Shop Menu */}
       {currentMenu === 'shop' && (
-        <div className="">
+        <div>
           <button
             className="flex items-center py-9"
             onClick={() => setCurrentMenu('main')}

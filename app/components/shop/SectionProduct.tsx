@@ -81,8 +81,8 @@ export default function SectionProduct({title, className}: {title?: string; clas
     <section
       className={`pt-[64px] lg:py-[100px] lg:pb-[64px] bg-background-1 lg:px-[64px] px-[12px]  ${className || ''}`}
     >
-      <div className="max-w-[1440px] mx-auto flex flex-col lg:gap-y-[32px]">
-        <h2 className="lg:text-[48px] text-2xl lg:leading-[64px] text-neutral-5 font-medium text-left">
+      <div className="max-w-[1440px] mx-auto flex flex-col lg:gap-y-[32px] gap-4">
+        <h2 className="lg:text-[48px] text-2xl lg:leading-[64px] text-neutral-5 font-medium text-left md:text-center">
           {title}
         </h2>
 
