@@ -80,7 +80,7 @@ const SectionTechnology: React.FC = () => {
             <img
               src="Frame_38.png"
               alt="Frame_38.png"
-              className="lg:w-[280px] w-[110px] h-[120px] lg:h-[260px]"
+              className="lg:w-[280px] w-full h-full lg:h-[260px]"
             />
           </div>
 
@@ -89,7 +89,7 @@ const SectionTechnology: React.FC = () => {
             <img
               src="Group_8.png"
               alt="Frame_8.png"
-              className="lg:w-[556px] lg:h-[480px] w-[180px] h-[210px]"
+              className="lg:w-[556px] lg:h-[480px] w-full h-full"
             />
           </div>
 
@@ -98,7 +98,7 @@ const SectionTechnology: React.FC = () => {
             <img
               src="Frame_39.png"
               alt="Frame_39.png"
-              className="lg:w-[280px] w-[110px] h-[120px] lg:h-[260px]"
+              className="lg:w-[280px] w-full h-full lg:h-[260px]"
             />
           </div>
         </div>

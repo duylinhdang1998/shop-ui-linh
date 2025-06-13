@@ -1,176 +1,317 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
+import ExpandIcon from '../icons/ExpandIcon';
+import CancelIcon from '../icons/CancelIcon';
+import useIsNotMobileViewport from '~/hooks/useIsNotMobileViewport';
 
-const initialTableData = [
-    {
-        id: 1,
-        benefit: 'Acne & Breakout Prevention',
-        isExpanded: true,
-        columns: {
-            dreamey: {
-                rating: 'Exceptional',
-                description: 'Powerful antibacterial and moisture-wicking properties prevents clogged pores and reduces acne-causing bacteria by 200% compared to cotton.',
-            },
-            cotton: {
-                rating: 'Low',
-                description: 'Traps bacteria and moisture against skin, significantly increasing risk of breakouts and irritation.',
-            },
-            silk: {
-                rating: 'Moderate',
-                description: 'Offers some antibacterial benefits but retains moisture that can allow bacteria to multiply, making it less effective for acne-prone skin.',
-            },
-        },
-        scienceInfo: {
-            title: 'The Science Behind CloudThera',
-            description: "The Hohenstein Institute's comprehensive 2018 clinical study on advanced cellulose fibers, which form the foundation of CloudThera's technology, demonstrates a remarkable ability to reduce bacterial growth by over 200% compared to cotton, scientifically supporting its effectiveness for acne-prone skin and prevention of breakouts.",
-        }
-    },
-    {
-        id: 2,
-        benefit: 'Dry Skin & Redness Relief',
-        isExpanded: false,
-        columns: {
-                dreamey: { rating: 'Exceptional', description: 'Description for Dry Skin & Redness Relief on Dreamey.' },
-                cotton: { rating: 'Low', description: 'Description for Dry Skin & Redness Relief on Cotton.' },
-                silk: { rating: 'Moderate', description: 'Description for Dry Skin & Redness Relief on Silk.' },
-        },
-        scienceInfo: null,
-    },
-    {
-        id: 3,
-        benefit: 'Wrinkle & Fine Line Prevention',
-        isExpanded: false,
-        columns: {
-                dreamey: { rating: 'Exceptional', description: 'Description for Wrinkle & Fine Line Prevention on Dreamey.' },
-                cotton: { rating: 'Low', description: 'Description for Wrinkle & Fine Line Prevention on Cotton.' },
-                silk: { rating: 'Exceptional', description: 'Description for Wrinkle & Fine Line Prevention on Silk.' },
-        },
-        scienceInfo: null,
-    },
-    {
-        id: 4,
-        benefit: 'Prevents Allergies & Irritation',
-        isExpanded: false,
-        columns: {
-                dreamey: { rating: 'Exceptional', description: 'Description for Prevents Allergies & Irritation on Dreamey.' },
-                cotton: { rating: 'Low', description: 'Description for Prevents Allergies & Irritation on Cotton.' },
-                silk: { rating: 'Exceptional', description: 'Description for Prevents Allergies & Irritation on Silk.' },
-        },
-        scienceInfo: null,
-    },
-];
-
-const ToggleIcon = ({ isExpanded }) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-orange-500">
-        <circle cx="12" cy="12" r="10" />
-        <line x1="8" y1="12" x2="16" y2="12" />
-        {!isExpanded && <line x1="12" y1="8" x2="12" y2="16" />}
-    </svg>
-);
-
-const RatingBadge = ({ rating }) => {
-    const baseClasses = 'px-4 py-1 text-sm font-medium rounded-full inline-block';
-    const styles = {
-        Exceptional: 'bg-green-200 text-green-800',
-        Moderate: 'bg-yellow-100 text-yellow-800 border border-yellow-200',
-        Low: 'bg-background-3 text-gray-800 border border-background-3',
-    };
-    return <span className={`${baseClasses} ${styles[rating] || styles.Low}`}>{rating}</span>;
+export const RatingBadge = ({rating}: {rating: string}) => {
+  const baseClasses =
+    'md:px-4 px-3 py-1 text-sm font-medium rounded-full inline-block';
+  const styles: Record<string, string> = {
+    Exceptional:
+      'bg-positive-green font-inter font-normal text-[12px] md:text-[20px] leading-xl tracking-normal text-center',
+    Moderate:
+      'bg-white font-inter font-normal text-[12px] md:text-[20px] leading-xl tracking-normal text-center',
+    Low: 'bg-white font-inter font-normal text-[12px] md:text-[20px] leading-xl tracking-normal text-center',
+  };
+  return (
+    <span className={`${baseClasses} ${styles[rating] || styles.Low}`}>
+      {rating}
+    </span>
+  );
 };
 
-const BenefitRow = ({ rowData, onToggle, index }) => {
-    const { id, benefit, isExpanded, columns, scienceInfo } = rowData;
-    const isEven = index % 2 === 0;
+const Drawer = ({
+  data,
+  closeDrawer,
+}: {
+  data: {
+    id: number;
+    benefit: string;
+    columns: {
+      dreamey: {rating: string; description: string};
+      cotton: {rating: string; description: string};
+      silk: {rating: string; description: string};
+    };
+    scienceInfo: {title: string; description: string} | null;
+  };
+  closeDrawer: () => void;
+}) => {
+  return (
+    <>
+      <div
+        className={`fixed top-0 left-0 w-full h-full bg-[#00000066] z-40  transition-all duration-700 ease-in-out ${
+          data ? 'opacity-100 translate-y-0' : 'opacity-0 pointer-events-none translate-y-full'
+        }`}
+        role="button"
+        tabIndex={0}
+        onClick={closeDrawer}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            closeDrawer();
+          }
+        }}
+      ></div>
 
-    return (
-        <div className={`grid grid-cols-1 md:grid-cols-4 ${!isEven ? 'bg-slate-50/70' : 'bg-backgound-2'}`}>
-            <div className="p-4 border-r border-background-3 ">
-                <div className="flex items-center gap-3">
-                    <button onClick={() => onToggle(id)}>
-                        <ToggleIcon isExpanded={isExpanded} />
-                    </button>
-                    <h3 className="font-semibold text-gray-800">{benefit} ewew</h3>
-                </div>
-            </div>
-            <div className="p-4 border-r border-background-3 border-b">
-                <div className="text-center">
-                    <RatingBadge rating={columns.dreamey.rating} />
-                </div>
-                {isExpanded && (
-                    <div className="pt-6 ">
-                        <p className="text-gray-600 text-sm">{columns.dreamey.description}</p>
-                    </div>
-                )}
-            </div>
-            <div className="p-4 border-r border-background-3  border-b">
-                <div className="text-center">
-                    <RatingBadge rating={columns.cotton.rating} />
-                </div>
-                {isExpanded && (
-                    <div className="pt-6">
-                        <p className="text-gray-600 text-sm">{columns.cotton.description}</p>
-                    </div>
-                )}
-            </div>
-            <div className="p-4 border-background-3 border-b">
-                <div className="text-center">
-                    <RatingBadge rating={columns.silk.rating} />
-                </div>
-                {isExpanded && (
-                    <div className="pt-6">
-                        <p className="text-gray-600 text-sm">{columns.silk.description}</p>
-                    </div>
-                )}
-            </div>
-            {isExpanded && scienceInfo && (
-                <div className="md:col-start-2 md:col-span-4 p-4  border-l  border-background-3">
-                        <div className="grid grid-cols-1 md:grid-cols-4">
-                                <div className="md:col-start-1 md:col-span-3">
-                                        <h4 className="font-bold text-gray-800 text-left mb-2">{scienceInfo.title}</h4>
-                                        <p className="text-gray-600 text-sm text-left max-w-4xl mx-auto">{scienceInfo.description}</p>
-                                </div>
-                        </div>
-                </div>
-            )}
+      <div
+        className={`fixed bottom-0 left-0 w-full h-[calc(100vh-132px)] bg-background-2 shadow-lg z-50 transition-transform duration-700 ease-in-out ${
+          data ? 'translate-y-0' : 'translate-y-full'
+        }`}
+      >
+        <div className="flex justify-between items-center p-3 border-b border-neutral-1">
+          <h3 className="font-inter font-semibold text-[14px] leading-xl tracking-normal">
+            {data?.benefit}
+          </h3>
+          <CancelIcon
+            width={24}
+            height={24}
+            className="cursor-pointer"
+            onClick={closeDrawer}
+          />
         </div>
-    );
+
+        <div className="">
+          {Object.entries(data?.columns || {}).map(([key, column]) => (
+            <div
+              key={key}
+              className="flex flex-col border-b border-neutral-0 p-3 max-h-[calc(100vh-158px)] overflow-y-auto"
+            >
+              <div className="flex justify-between items-center">
+                <h4 className="font-satoshi font-medium text-[14px] leading-xl tracking-normal text-gray-800">
+                  {key.charAt(0).toUpperCase() + key.slice(1)}
+                </h4>
+                <RatingBadge rating={column.rating || ''} />
+              </div>
+              <p className="font-inter font-normal text-[14px] leading-xl tracking-normal text-gray-600 ">
+                {column.description}
+              </p>
+            </div>
+          ))}
+
+          {data?.scienceInfo && (
+            <div className="p-3">
+              <h4 className="font-satoshi font-medium text-[14px] leading-xl tracking-normal text-gray-800">
+                {data.scienceInfo.title}
+              </h4>
+              <p className="font-inter font-normal text-[14px] leading-xl tracking-normal text-gray-600 ">
+                {data.scienceInfo.description}
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
+    </>
+  );
 };
 
-export default function App() {
-    const [tableData, setTableData] = useState(initialTableData);
-
-    const handleToggleRow = (id) => {
-        setTableData(
-            tableData.map((row) =>
-                row.id === id ? { ...row, isExpanded: !row.isExpanded } : row
-            )
-        );
+const BenefitRow = ({
+  rowData,
+  onToggle,
+  index,
+}: {
+  rowData: {
+    id: number;
+    benefit: string;
+    isExpanded: boolean;
+    columns: {
+      dreamey: {rating: string; description: string};
+      cotton: {rating: string; description: string};
+      silk: {rating: string; description: string};
     };
+    scienceInfo: {title: string; description: string} | null;
+  };
+  onToggle: (id: number) => void;
+  index: number;
+}) => {
+  const {id, benefit, isExpanded, columns, scienceInfo} = rowData;
+  const isEven = index % 2 === 0;
 
-    return (
-        <div className="flex items-center justify-center font-sans">
-            <div className="w-full max-w-6xl mx-auto bg-background-2 rounded-xl overflow-hidden">
-                <div className="grid grid-cols-1 md:grid-cols-4 bg-background-2 sticky top-0 z-10 ">
-                        <div className="p-4 border-r border-background-3">
-                                <h2 className="font-bold text-lg text-gray-800">Research-Backed Benefits</h2>
-                        </div>
-                        <div className="p-4 border-r border-background-3 text-center">
-                                <h2 className="font-bold text-lg text-gray-800">Dreamey's CloudThera</h2>
-                        </div>
-                        <div className="p-4 border-r border-background-3 text-center">
-                                <h2 className="font-bold text-lg text-gray-800">Cotton</h2>
-                        </div>
-                        <div className="p-4 text-center">
-                                <h2 className="font-bold text-lg text-gray-800">Silk</h2>
-                        </div>
-                </div>
-                <div className=" border-background-3">
-                    {tableData.map((row, index) => (
-                        <div key={row.id} className="border-b border-background-3 last:border-b-0">
-                                <BenefitRow rowData={row} onToggle={handleToggleRow} index={index} />
-                        </div>
-                    ))}
-                </div>
-            </div>
+  return (
+    <div
+      className={`grid grid-cols-1 md:grid-cols-4 ${
+        !isEven ? 'bg-background-3' : 'bg-backgound-2'
+      }`}
+    >
+      <div className="py-8 px-6 border-r border-background-3">
+        <div className="flex items-center justify-between gap-3">
+          <h3 className="font-satoshi font-medium text-[20px] leading-xl tracking-normal text-gray-800">
+            {benefit}
+          </h3>
+          <button onClick={() => onToggle(id)} className="cursor-pointer">
+            <ExpandIcon isExpanded={isExpanded} />
+          </button>
         </div>
-    );
-}
+      </div>
+      <div
+        className={`py-8 px-6 flex flex-col ${
+          isExpanded ? 'justify-start' : 'justify-center'
+        } items-center border-r border-background-3 border-b`}
+      >
+        <div className="text-center">
+          <RatingBadge rating={columns.dreamey.rating} />
+        </div>
+        {isExpanded && (
+          <div className="pt-6">
+            <p className="font-inter font-normal text-[20px] leading-xl tracking-normal text-center text-gray-600">
+              {columns.dreamey.description}
+            </p>
+          </div>
+        )}
+      </div>
+      <div
+        className={`py-8 px-6 flex flex-col ${
+          isExpanded ? 'justify-start' : 'justify-center'
+        } items-center border-r border-background-3 border-b`}
+      >
+        <div className="text-center">
+          <RatingBadge rating={columns.cotton.rating} />
+        </div>
+        {isExpanded && (
+          <div className="pt-6">
+            <p className="font-inter font-normal text-[20px] leading-xl tracking-normal text-center text-gray-600">
+              {columns.cotton.description}
+            </p>
+          </div>
+        )}
+      </div>
+      <div
+        className={`py-8 px-6 flex flex-col ${
+          isExpanded ? 'justify-start' : 'justify-center'
+        } items-center  border-background-3 border-b`}
+      >
+        <div className="text-center">
+          <RatingBadge rating={columns.silk.rating} />
+        </div>
+        {isExpanded && (
+          <div className="pt-6">
+            <p className="font-inter font-normal text-[20px] leading-xl tracking-normal text-center text-gray-600">
+              {columns.silk.description}
+            </p>
+          </div>
+        )}
+      </div>
+      {isExpanded && scienceInfo && (
+        <div className="md:col-start-2 md:col-span-4 p-4 border-l border-background-3">
+          <div className="grid grid-cols-1 md:grid-cols-4">
+            <div className="md:col-start-1 md:col-span-3">
+              <h4 className="font-inter font-semibold text-[24px] leading-2xl tracking-normal text-gray-800 text-left mb-2">
+                {scienceInfo.title}
+              </h4>
+              <p className="font-inter font-normal text-[20px] leading-xl tracking-normal text-center text-gray-600 text-left max-w-4xl mx-auto">
+                {scienceInfo.description}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const ExpandTable = ({
+  tableData,
+  onToggleRow,
+  tableLabel = 'Benefits Overview',
+}: {
+  tableData: Array<{
+    id: number;
+    benefit: string;
+    isExpanded: boolean;
+    columns: {
+      dreamey: {rating: string; description: string};
+      cotton: {rating: string; description: string};
+      silk: {rating: string; description: string};
+    };
+    scienceInfo: {title: string; description: string} | null;
+  }>;
+  onToggleRow: (id: number) => void;
+  tableLabel: string;
+}) => {
+  const [drawerData, setDrawerData] = useState<null | (typeof tableData)[0]>(
+    null,
+  );
+
+  const onToggleRowShowDrawer = (id: number) => {
+    const selectedRow = tableData.find((row) => row.id === id);
+    setDrawerData(selectedRow || null);
+  };
+
+  const closeDrawer = () => {
+    setDrawerData(null);
+  };
+
+  return (
+    <div className="flex flex-col justify-center font-sans">
+      <span className="font-satoshi font-medium lg:text-[32px] md:px-6 px-3 md:pb-4 md:pt-[64x] mx-0 pt-4 leading-3xl text-left tracking-normal">
+        {tableLabel}
+      </span>
+      <div className="flex flex-col gap-6 md:hidden">
+        {tableData.map((row) => (
+          <div key={row.id} className="flex flex-col bg-background-3 mt-4">
+            {/* First block: Benefit and toggle icon */}
+            <div className="flex items-center justify-between p-4">
+              <h3 className="font-satoshi font-medium text-[14px] leading-xl tracking-normal text-gray-800">
+                {row.benefit}
+              </h3>
+              <button
+                onClick={() => onToggleRowShowDrawer(row.id)}
+                className="cursor-pointer"
+              >
+                <ExpandIcon isExpanded={false} />
+              </button>
+            </div>
+
+            {/* Second block: Ratings */}
+            <div className="grid grid-cols-3 gap-4 bg-background-3">
+              <div className="p-4 font-satoshi font-medium text-[14px] leading-xl tracking-normal text-center flex items-center justify-center relative after:content-[''] after:absolute after:right-0 after:w-[1px] after:h-[24px] after:bg-neutral-0">
+                <RatingBadge rating={row.columns.dreamey.rating} />
+              </div>
+              <div className="p-4 font-satoshi font-medium text-[14px] leading-xl tracking-normal text-center flex items-center justify-center relative after:content-[''] after:absolute after:right-0 after:w-[1px] after:h-[24px] after:bg-neutral-0">
+                <RatingBadge rating={row.columns.cotton.rating} />
+              </div>
+              <div className="p-4 font-satoshi font-medium text-[14px] leading-xl tracking-normal text-center flex items-center justify-center">
+                <RatingBadge rating={row.columns.silk.rating} />
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="w-full hidden md:flex flex-col mx-auto bg-background-2 rounded-xl overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-4 bg-background-2 sticky top-0 z-8">
+          <div className="lg:p-6 border-r border-background-3 flex-col flex items-center">
+            <h2 className="font-satoshi font-medium text-[24px] leading-2xl tracking-normal text-gray-800">
+              Research-Backed Benefits
+            </h2>
+          </div>
+          <div className="border-r border-background-3 flex-col text-center flex items-center justify-center">
+            <h2 className="font-satoshi font-medium text-[24px] leading-2xl tracking-normal text-gray-800">
+              Dreamey&apos;s CloudThera
+            </h2>
+          </div>
+          <div className="border-r border-background-3 flex-col text-center flex items-center justify-center">
+            <h2 className="font-satoshi font-medium text-[24px] leading-2xl tracking-normal text-gray-800">
+              Cotton
+            </h2>
+          </div>
+          <div className="text-center flex-col flex items-center justify-center">
+            <h2 className="font-satoshi font-medium text-[24px] leading-2xl tracking-normal text-gray-800">
+              Silk
+            </h2>
+          </div>
+        </div>
+        <div className="border-background-3">
+          {tableData.map((row, index) => (
+            <div
+              key={row.id}
+              className="border-b border-background-3 last:border-b-0"
+            >
+              <BenefitRow rowData={row} onToggle={onToggleRow} index={index} />
+            </div>
+          ))}
+        </div>
+      </div>
+      {drawerData && <Drawer data={drawerData} closeDrawer={closeDrawer} />}
+    </div>
+  );
+};
+
+export default ExpandTable;
