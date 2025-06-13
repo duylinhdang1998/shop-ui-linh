@@ -13,7 +13,7 @@ const SectionSlogan: React.FC = () => {
             className="lg:max-w-[680px] lg:max-h-[680px] max-w-[366px] max-h-[366px] w-full h-full"
           />
         </div>
-        <div className="flex flex-col gap-8 lg:gap-[64px] order-2 lg:order-1">
+        <div className="flex flex-col gap-8 items-center md:items-start lg:gap-[64px] order-2 lg:order-1">
             <h2 className="font-satoshi font-medium lg:text-[48px] text-[24px] leading-[3rem] tracking-normal">
             Discover the Comfort
             </h2>

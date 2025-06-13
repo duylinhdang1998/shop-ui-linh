@@ -28,25 +28,29 @@ const Carousel: React.FC<CarouselProps> = ({items}) => {
     setCurrentIndex(index);
   };
 
-  const isNotMobileViewport = useIsNotMobileViewport()
+  const isNotMobileViewport = useIsNotMobileViewport();
+
   return (
     <div
-      className={`relative flex flex-col bg-background-2 lg:gap-[32px] lg:p-[64px] lg:px-[64px] md:rounded-r-[24px] gap-5 p-8 rounded-r-0${
+      className={`flex flex-col bg-background-2 lg:gap-[32px] lg:p-[64px] lg:px-[64px] md:rounded-r-[24px] gap-5 p-8 rounded-r-0 ${
         isNotMobileViewport
           ? 'md:rounded-r-[24px] rounded-r-0'
           : 'md:rounded-b-0 rounded-b-[24px]'
-      } justify-center items-center w-full h-full`}
+      } justify-between items-center w-full h-full`}
     >
-      <h2 className="font-satoshi font-medium lg:text-[32px] text-[20px] leading-3xl tracking-normal">
-        {items[currentIndex].title}
-      </h2>
-      <p className="font-inter font-normal lg:text-[24px] text-[14px] leading-2xl tracking-normal">
-        {items[currentIndex].description}
-      </p>
+      {/* Content */}
+      <div className="flex-grow flex flex-col justify-center items-center">
+        <h2 className="font-satoshi font-medium lg:text-[32px] text-[20px] leading-3xl tracking-normal">
+          {items[currentIndex].title}
+        </h2>
+        <p className="font-inter font-normal lg:text-[24px] text-[14px] leading-2xl lg:h-auto h-[80px] tracking-normal line-clamp-4 pt-5 lg:pt-8">
+          {items[currentIndex].description}
+        </p>
+      </div>
 
       {/* Navigation */}
-      <div className=" w-full  flex justify-between items-center gap-4 md:mt-[136px] mt-[48px]">
-        <ArrowDown onClick={handlePrev} className='cursor-pointer rotate-90' />
+      <div className="flex justify-between items-center w-full px-8 mt-auto pt-4">
+        <ArrowDown onClick={handlePrev} className="cursor-pointer rotate-90" />
         <div className="flex gap-2 cursor-pointer items-center">
           {items.map((_, index) => (
             <button
@@ -58,7 +62,7 @@ const Carousel: React.FC<CarouselProps> = ({items}) => {
             ></button>
           ))}
         </div>
-          <ArrowDown onClick={handlePrev} className='cursor-pointer -rotate-90'/>
+        <ArrowDown onClick={handleNext} className="cursor-pointer -rotate-90" />
       </div>
     </div>
   );
