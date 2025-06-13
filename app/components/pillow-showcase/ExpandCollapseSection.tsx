@@ -21,7 +21,7 @@ const ExpandCollapseSection: React.FC<ExpandCollapseSectionProps> = ({ items }) 
     return (
         <div className="w-full mt-6">
             <div className="">
-                <ul className="py-4">
+                <ul className="lg:py-4 ">
                     {items.map((item, index) => {
                         const isExpanded = expandedIndex === index;
 
@@ -37,7 +37,7 @@ const ExpandCollapseSection: React.FC<ExpandCollapseSectionProps> = ({ items }) 
                                     onClick={() => toggleExpand(index)}
                                     onKeyDown={(e) => handleKeyDown(e, index)}
                                 >
-                                    <span className="font-satoshi font-medium text-[24px] leading-[32px] tracking-normal">
+                                    <span className="font-satoshi font-medium lg:text-[24px] text-[16px] leading-[32px] tracking-normal">
                                         {item.question}
                                     </span>
                                     <ArrowDown
@@ -45,7 +45,7 @@ const ExpandCollapseSection: React.FC<ExpandCollapseSectionProps> = ({ items }) 
                                     />
                                 </div>
                                 {isExpanded && (
-                                    <div className="font-satoshi px-3 pr-6 font-medium text-[18px] leading-[32px] tracking-normal">
+                                    <div className="font-satoshi px-3 pr-6 font-medium lg:text-[18px] text-[14px] leading-[32px] tracking-normal">
                                         <span>{item.answer}</span>
                                     </div>
                                 )}

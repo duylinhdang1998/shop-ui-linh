@@ -9,8 +9,46 @@ import {GuaranteesList} from './GuaranteesList';
 import BagIcon from '../icons/BagIcon';
 import RelevantProducts from './RelevantProducts';
 import ExpandCollapseSection from './ExpandCollapseSection';
+import useIsNotMobileViewport from '~/hooks/useIsNotMobileViewport';
+import ExtractIcon from '../icons/ExtractIcon';
+import PlusIcon from '../icons/PlusIcon';
+import NormalizeSwiper from '../ui/NormalizeSwiper';
 
 const SectionProductDetail: React.FC = () => {
+  const isNotMobileViewport = useIsNotMobileViewport(724);
+
+const awardWinningProducts: any[] = [
+    {
+        featuredImage: {
+            url: '/img_pillowcase.png',
+            altText: 'Pillowcases',
+        },
+    },
+    {
+        featuredImage: {
+            url: '/img_pillowcase.png',
+            altText: 'Pillowcases',
+        },
+    },
+    {
+        featuredImage: {
+            url: '/img_pillowcase.png',
+            altText: 'Pillowcases',
+        },
+    },
+    {
+        featuredImage: {
+            url: '/img_pillowcase.png',
+            altText: 'Essentials Set',
+        },
+    },
+    {
+        featuredImage: {
+            url: '/img_pillowcase.png',
+            altText: 'Pillowcases',
+        },
+    },
+];
   const sampleItems = [
     {
       question: 'What materials are used in the product?',
@@ -82,50 +120,56 @@ const SectionProductDetail: React.FC = () => {
   );
 
   return (
-    <div className="w-full flex-col items-center gap-[80px] bg-background-2 flex justify-center py-[64px] lg:py-[100px]">
-      <div className="max-w-[1440px] grid grid-cols-1 md:grid-cols-2 gap-[80px] items-start justify-center h-full px-3 lg:px-[64px]">
+    <div className="w-full flex-col items-center lg:gap-[80px] gap-[48px] bg-background-2 flex justify-center py-[32px] lg:py-[100px]">
+      <div className="max-w-[1440px] grid grid-cols-1 md:grid-cols-2 lg:gap-[80px] gap-[48px] items-start justify-center h-full px-3 lg:px-[64px]">
         {/* Block 1: Images */}
-        <div className="grid grid-rows-2 gap-8">
-          <img
-            src={bigImage}
-            alt="Big Product"
-            className="w-full max-w-[680px] h-auto object-cover row-span-1"
-          />
-          <div className="grid grid-cols-2 gap-8">
-            {images.map((image, index) => (
-              <button
-                key={index}
-                className="w-full h-auto object-cover"
-                onClick={() => {
-                  if (index == 1 || index === 2) {
-                    setBigImage(image.src);
-                  }
-                }}
-              >
-                <img
-                  src={image.src}
-                  alt={image.alt}
+        {isNotMobileViewport ? (
+          <div className="grid grid-rows-2 gap-8">
+            <img
+              src={bigImage}
+              alt="Big Product"
+              className="w-full max-w-[680px] h-auto object-cover row-span-1"
+            />
+            <div className="grid grid-cols-2 gap-8">
+              {images.map((image, index) => (
+                <button
+                  key={index}
                   className="w-full h-auto object-cover"
-                />
-              </button>
-            ))}
+                  onClick={() => {
+                    if (index == 1 || index === 2) {
+                      setBigImage(image.src);
+                    }
+                  }}
+                >
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    className="w-full h-auto object-cover"
+                  />
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
+        ) : (
+          <NormalizeSwiper
+            products={awardWinningProducts}
+          />
+        )}
 
         {/* Block 2: Product Details */}
         <div className="flex flex-col">
-          <h1 className="!m-o font-satoshi font-medium text-[48px] leading-5xl tracking-normal">
+          <h1 className="!m-o font-satoshi font-medium lg:text-[48px] text-[24px] leading-5xl tracking-normal">
             CloudThera™ Pillowcases
           </h1>
-          <h2 className="text-neutral-3 pt-2 font-inter font-normal text-[20px] leading-xl tracking-normal">
+          <h2 className="text-neutral-3 lg:pt-2 pt-1 font-inter font-normal text-[12px] lg:text-[20px] leading-xl tracking-normal">
             Includes 2 pillowcases
           </h2>
-          <div className="flex items-center gap-6 pt-6">
+          <div className="flex items-center gap-6 lg:pt-6 pt-4">
             <Rating
               value={5}
               readOnly
               style={{
-                width: 150,
+                width: isNotMobileViewport ? 150 : 100,
               }}
               itemStyles={{
                 activeFillColor: '#F69149',
@@ -133,35 +177,35 @@ const SectionProductDetail: React.FC = () => {
                 itemShapes: starDrawing,
               }}
             />
-            <span className="font-inter text-neutral-3 font-normal text-[20px] leading-xl tracking-normal">
+            <span className="font-inter text-neutral-3 font-normal lg:text-[20px] text-[12px] leading-xl tracking-normal">
               15,000+ happy customers
             </span>
           </div>
-          <div className="flex  items-center  gap-6 pt-6">
-            <span className="font-satoshi font-medium text-[48px] leading-5xl tracking-normal">
+          <div className="flex  items-center  gap-6 pt-4 lg:pt-6">
+            <span className="font-satoshi font-medium lg:text-[48px] text-[24px] leading-5xl tracking-normal">
               $69
             </span>
-            <span className="font-satoshi font-medium text-4xl leading-[48px] tracking-normal line-through">
+            <span className="font-satoshi font-medium lg:text-[32px] text-[20px] leading-[48px] tracking-normal line-through">
               $85
             </span>
             <span className="font-inter flex justify-center items-center rounded-[1000px] text-white py-2 px-4 bg-black  font-semibold text-[20px]  tracking-normal">
               SAVE 19%
             </span>
           </div>
-          <p className="font-inter font-normal text-[20px] leading-xl tracking-normal pt-6">
+          <p className="font-inter font-normal lg:text-[20px] text-[14px] leading-xl tracking-normal pt-4 lg:pt-6">
             Experience clearer skin, fewer wrinkles, smoother hair, and
             unmatched softness for deeper, more restorative sleep. CloudThera™
             is scientifically proven to outperform cotton and silk in every
             measurable way.
           </p>
-          <div className="flex flex-col gap-4 pt-6">
+          <div className="flex flex-col gap-4 pt-4 lg:pt-6">
             <div>
               <span className="font-inter font-normal text-[20px] leading-xl tracking-normal">
                 <div className="flex items-center gap-2">
-                  <span className="font-inter font-normal text-[20px] leading-xl tracking-normal">
+                  <span className="font-inter font-normal lg:text-[20px] text-[14px] leading-xl tracking-normal">
                     Color:
                   </span>
-                  <span className="font-satoshi font-medium text-[24px] leading-2xl tracking-normal">
+                  <span className="font-satoshi font-medium lg:text-[24px] text-[16px] leading-2xl tracking-normal">
                     {selectedColor}
                   </span>
                 </div>
@@ -170,7 +214,7 @@ const SectionProductDetail: React.FC = () => {
                 {colors.map((color) => (
                   <button
                     key={color}
-                    className={`w-[56px] h-[56px] rounded-full cursor-pointer ${
+                    className={`lg:w-[56px] lg:h-[56px] w-[48px] h-[48px] rounded-full cursor-pointer ${
                       color === 'yellow'
                         ? 'border border-neutral-0 bg-[#E8E0D2] '
                         : color === 'white'
@@ -188,11 +232,11 @@ const SectionProductDetail: React.FC = () => {
               </div>
             </div>
             <div>
-              <div className="flex items-center gap-2">
-                <span className="font-inter font-normal text-[20px] leading-xl tracking-normal">
+              <div className="flex items-center gap-2 lg:pt-6 pt-4">
+                <span className="font-inter font-normal lg:text-[20px] text-[14px] leading-xl tracking-normal">
                   Size:{' '}
                 </span>
-                <span className="font-satoshi font-medium text-[24px] leading-2xl tracking-normal">
+                <span className="font-satoshi font-medium lg:text-[24px] text-[14px] leading-2xl tracking-normal">
                   {selectedSize}
                 </span>
               </div>
@@ -200,11 +244,11 @@ const SectionProductDetail: React.FC = () => {
                 {sizes.map((size) => (
                   <button
                     key={size.short}
-                    className={`py-4 px-8 flex items-center justify-center border cursor-pointer ${
+                    className={`lg:py-4 lg:px-8 py-3 px-5 flex items-center justify-center border cursor-pointer ${
                       selectedSize === size.fullText
                         ? 'border-[#F69149]'
                         : 'border-neutral-0'
-                    } font-inter font-normal text-[16px] rounded-[8px] leading-xl tracking-normal`}
+                    } font-inter font-normal lg:text-[16px] text-[14px] rounded-[8px] leading-xl tracking-normal`}
                     onClick={() => setSelectedSize(size.fullText)}
                   >
                     {size.fullText}
@@ -213,22 +257,24 @@ const SectionProductDetail: React.FC = () => {
               </div>
             </div>
             <div className="flex items-center gap-4 pt-6 cursor-pointer">
-              <span className="font-satoshi font-medium text-[16px]">QTY:</span>
+              <span className="font-satoshi font-medium lg:text-[16px] text-[14px]">
+                QTY:
+              </span>
               <div className="flex items-center gap-4">
                 <button
-                  className="w-[56px] h-[56px] bg-neutral-0 rounded-full flex items-center justify-center"
+                  className="lg:w-[56px] lg:h-[56px] w-[48px] h-[48px] bg-background-2 border border-neutral-0 lg:bg-neutral-0 rounded-full flex items-center justify-center"
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
                 >
-                  -
+                  <ExtractIcon />
                 </button>
                 <span className="tl font-inter font-semibold text-lg leading-[20px] tracking-[0%] text-center">
                   {quantity}
                 </span>
                 <button
-                  className="w-[56px] h-[56px] bg-neutral-0 rounded-full flex items-center justify-center"
+                  className="lg:w-[56px] lg:h-[56px] w-[48px] h-[48px] bg-background-2 border border-neutral-0 lg:bg-neutral-0 rounded-full flex items-center justify-center"
                   onClick={() => setQuantity(quantity + 1)}
                 >
-                  +
+                  <PlusIcon />
                 </button>
               </div>
             </div>
@@ -236,13 +282,13 @@ const SectionProductDetail: React.FC = () => {
           <ButtonUnderline className="lg:py-4 lg:px-8 px-5 py-3 mt-6">
             <div className="flex justify-center items-center gap-4">
               <BagIcon />
-              <span className="font-satoshi font-medium text-[24px] leading-2xl tracking-normal">
+              <span className="font-satoshi font-medium lg:text-[24px] text-[16px] leading-2xl tracking-normal">
                 ADD TO CART
               </span>
             </div>
           </ButtonUnderline>
           <GuaranteesList className="mt-6" guarantees={guarantees} />
-          <span className="pt-6 font-satoshi font-medium text-[24px] leading-2xl tracking-[0%]">
+          <span className="lg:pt-6 pt-4 font-satoshi font-medium lg:text-[24px] text-[16px] leading-2xl tracking-[0%]">
             Bundles and save
           </span>
           <RelevantProducts products={relevantProducts} />
