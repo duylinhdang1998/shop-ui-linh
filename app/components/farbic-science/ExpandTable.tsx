@@ -132,7 +132,7 @@ const BenefitRow = ({
       }`}
     >
       {/* Benefit Title and Toggle */}
-      <div className="py-2 px-6 border-r border-background-3">
+      <div className="py-4 px-6 border-r border-background-3">
         <div className="flex items-center justify-between gap-3">
           <h3 className="font-satoshi font-medium text-[18px] leading-xl tracking-normal text-gray-800">
             {benefit}
