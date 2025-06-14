@@ -113,7 +113,7 @@ const BenefitRow = ({
     benefit: string;
     isExpanded: boolean;
     columns: {
-      dreamey: {rating: string; description: string};
+      dreamey: {rating: string; description:string};
       cotton: {rating: string; description: string};
       silk: {rating: string; description: string};
     };
@@ -131,9 +131,10 @@ const BenefitRow = ({
         !isEven ? 'bg-background-3' : 'bg-backgound-2'
       }`}
     >
-      <div className="py-8 px-6 border-r border-background-3">
+      {/* Benefit Title and Toggle */}
+      <div className="py-2 px-6 border-r border-background-3">
         <div className="flex items-center justify-between gap-3">
-          <h3 className="font-satoshi font-medium text-[20px] leading-xl tracking-normal text-gray-800">
+          <h3 className="font-satoshi font-medium text-[18px] leading-xl tracking-normal text-gray-800">
             {benefit}
           </h3>
           <button onClick={() => onToggle(id)} className="cursor-pointer">
@@ -141,68 +142,68 @@ const BenefitRow = ({
           </button>
         </div>
       </div>
-      <div
-        className={`py-8 px-6 flex flex-col ${
-          isExpanded ? 'justify-start' : 'justify-center'
-        } items-center border-r border-background-3 border-b`}
-      >
-        <div className="text-center">
-          <RatingBadge rating={columns.dreamey.rating} />
-        </div>
-        {isExpanded && (
-          <div className="pt-6">
-            <p className="font-inter font-normal text-[20px] leading-xl tracking-normal text-center text-gray-600">
-              {columns.dreamey.description}
-            </p>
-          </div>
-        )}
+
+      {/* Dreamey Rating */}
+      <div className=" px-6 flex justify-center items-center border-r border-background-3">
+        <RatingBadge rating={columns.dreamey.rating} />
       </div>
-      <div
-        className={`py-8 px-6 flex flex-col ${
-          isExpanded ? 'justify-start' : 'justify-center'
-        } items-center border-r border-background-3 border-b`}
-      >
-        <div className="text-center">
-          <RatingBadge rating={columns.cotton.rating} />
-        </div>
-        {isExpanded && (
-          <div className="pt-6">
-            <p className="font-inter font-normal text-[20px] leading-xl tracking-normal text-center text-gray-600">
-              {columns.cotton.description}
-            </p>
-          </div>
-        )}
+
+      {/* Cotton Rating */}
+      <div className=" px-6 flex justify-center items-center border-r border-background-3">
+        <RatingBadge rating={columns.cotton.rating} />
       </div>
-      <div
-        className={`py-8 px-6 flex flex-col ${
-          isExpanded ? 'justify-start' : 'justify-center'
-        } items-center  border-background-3 border-b`}
-      >
-        <div className="text-center">
-          <RatingBadge rating={columns.silk.rating} />
-        </div>
-        {isExpanded && (
-          <div className="pt-6">
-            <p className="font-inter font-normal text-[20px] leading-xl tracking-normal text-center text-gray-600">
-              {columns.silk.description}
-            </p>
-          </div>
-        )}
+
+      {/* Silk Rating */}
+      <div className=" px-6 flex justify-center items-center">
+        <RatingBadge rating={columns.silk.rating} />
       </div>
-      {isExpanded && scienceInfo && (
-        <div className="md:col-start-2 md:col-span-4 p-4 border-l border-background-3">
-          <div className="grid grid-cols-1 md:grid-cols-4">
-            <div className="md:col-start-1 md:col-span-3">
-              <h4 className="font-inter font-semibold text-[24px] leading-2xl tracking-normal text-gray-800 text-left mb-2">
-                {scienceInfo.title}
-              </h4>
-              <p className="font-inter font-normal text-[20px] leading-xl tracking-normal text-center text-gray-600 text-left max-w-4xl mx-auto">
-                {scienceInfo.description}
+
+      {/* Expanded Content Section */}
+      <div
+        className={`md:col-span-4 transition-all duration-500 ease-in-out overflow-hidden ${
+          isExpanded ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
+        }`}
+      >
+        <div className="grid grid-cols-1 md:grid-cols-4 border-background-3">
+          <div></div>
+            {/* Dreamey Description */}
+            <div className="p-6 pt-0 border-l border-b border-r border-background-3">
+              <p className="font-inter font-normal text-[18px] leading-relaxed text-center text-gray-600">
+                {columns.dreamey.description}
               </p>
             </div>
-          </div>
+
+            {/* Cotton Description */}
+            <div className="p-6 pt-0 border-r border-b border-background-3">
+              <p className="font-inter font-normal text-[18px] leading-relaxed text-center text-gray-600">
+                {columns.cotton.description}
+              </p>
+            </div>
+
+            {/* Silk Description */}
+            <div className="p-6 pt-0 border-b border-background-3">
+              <p className="font-inter font-normal text-[18px] leading-relaxed text-center text-gray-600">
+                {columns.silk.description}
+              </p>
+            </div>
         </div>
-      )}
+
+        {scienceInfo && (
+         
+          <div className="col-span-3">
+            <div className="grid grid-cols-1 md:grid-cols-4">
+              <div className="py-8 md:col-start-2 md:col-span-3  border-l border-background-3 pl-8">
+                <h4 className="font-inter font-semibold text-[24px] leading-2xl tracking-normal text-gray-800 text-left mb-2">
+                  {scienceInfo.title}
+                </h4>
+                <p className="font-inter font-normal text-[20px] leading-xl tracking-normal text-gray-600 lg:text-left max-w-4xl">
+                  {scienceInfo.description}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
@@ -277,7 +278,7 @@ const ExpandTable = ({
       </div>
       <div className="w-full hidden md:flex flex-col mx-auto bg-background-2 rounded-xl overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-4 bg-background-2 sticky top-0 z-8">
-          <div className="lg:p-6 border-r border-background-3 flex-col flex items-center">
+          <div className="lg:p-6 border-r border-background-3  flex-col flex items-center">
             <h2 className="font-satoshi font-medium text-[24px] leading-2xl tracking-normal text-gray-800">
               Research-Backed Benefits
             </h2>

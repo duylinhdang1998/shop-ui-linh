@@ -21,7 +21,7 @@ const SectionDesign: React.FC = () => {
   ];
 
   return (
-    <div className="w-full flex-col gap-[61px] lg:gap-[64px] bg-background-3 flex justify-center py-[64px] lg:py-[100px]">
+    <div className="w-full flex-col gap-[61px] lg:gap-[64px] bg-background-3 flex items-center justify-center py-[64px] lg:py-[100px]">
       <span className="font-satoshi font-medium lg:text-[48px] text-[24px] leading-5xl tracking-normal text-center">
         THOUGHTFULLY DESIGNED
       </span>
